@@ -5,9 +5,6 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.aop.framework.ProxyFactory;
 
-/**
- * Created by andrei on 29.12.2015.
- */
 public class Test {
 
     @Log(message = "Someone just said something")
@@ -21,7 +18,12 @@ public class Test {
         proxyFactory.addAdvice(
                 new MethodInterceptor() {
                     public Object invoke(MethodInvocation methodInvocation) throws Throwable {
-                        System.out.println("Overridden!");
+                        System.out.println(String.format("This method has %d annotations.",methodInvocation.getMethod().getAnnotations().length));
+                        if (methodInvocation.getMethod().isAnnotationPresent(Log.class)){
+                            Log log = methodInvocation.getMethod().getAnnotation(Log.class);
+                            System.out.println(log.message());
+                                
+                        }
                         return null;
                     }
                 }
