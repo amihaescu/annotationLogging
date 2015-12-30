@@ -22,13 +22,13 @@ public class LoggingAspect {
     public void logMethodAccessAfter(JoinPoint joinPoint) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         OnExit annon = signature.getMethod().getAnnotation(OnExit.class);
-        log.info(String.format("After method call logging this message %s", annon.message()));
+        log.info(String.format(annon.message(), joinPoint.getArgs()));
     }
 
     @Before("execution(* ro.acasa.annonLogging.service.*.*(..))")
     public void logMethodAccessBefore(JoinPoint joinPoint) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         OnCall annon = signature.getMethod().getAnnotation(OnCall.class);
-        log.info(String.format("Before method call logging this message %s", annon.message()));
+        log.info(String.format(annon.message(), joinPoint.getArgs()));
     }
 }

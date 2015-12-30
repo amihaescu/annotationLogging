@@ -15,7 +15,7 @@ public class MockController {
     @ResponseBody
     @RequestMapping("/mock")
     public String mockMethod(){
-        service.printSomeText();
+        service.printSomeText("John", 14);
         return "Done!";
     }
 

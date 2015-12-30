@@ -8,9 +8,9 @@ import ro.acasa.annonLogging.annotations.OnExit;
 @Service
 public class MockService {
 
-    @OnCall(message = "Calling method")
-    @OnExit(message = "Finished calling method")
-    public void printSomeText(){
-        System.out.println("Some text");
+    @OnCall(message = "Calling method with arguments %s %d")
+    @OnExit(message = "Finished calling method with arguments %s %d")
+    public void printSomeText(String from, int age){
+        System.out.println(String.format("Some text from  %s, age %d",from, age));
     }
 }
